@@ -1,4 +1,5 @@
 bs4
+Beautifulsoup
 streamlit
 pandas
 requests
