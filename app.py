@@ -4,7 +4,6 @@ import pandas as pd
 import requests
 import re
 from bs4 import BeautifulSoup
-# import datetime
 import streamlit as st
 
 def scrapying():
@@ -32,7 +31,6 @@ def scrapying():
 
         #　1page目だけ総ページ数を取得
         total_pages = int(soup.select_one('a.to_last_page').text)
-        st.text(f"現在スクレイピング中のページ数：{i/total_pages}")
         # 解析したHTMLから各商品情報を取得
         card_infos = soup.select('ul.layout160 > li')
 
@@ -53,15 +51,6 @@ def scrapying():
                 stock = stock.replace("在庫数 ", "")
                 img_url = card_info.select_one('div.global_photo > img').get('src')
                 card_url = card_info.select_one('div.item_data > a').get('href')
-                
-
-                # print(card_name)
-                # print(rarity)
-                # print(card_number)
-                # print(price)
-                # print(stock)
-                # print(img_url)
-                # print(card_url)
 
                 d={
                     '商品名':card_name,
@@ -73,14 +62,11 @@ def scrapying():
                     '商品URL':card_url        
                 }
                 d_list.append(d)
-                    # 進捗を更新
-
-        # progress_bar.progress(i / total_pages * 100)
         
         # 「次へ」ボタンがあるかどうかをチェック
         next_page = soup.select_one('a.to_next_page')
 
-        # 「次へ」ボタンがあれば、次ページ数を宣言する
+        # 「次へ」ボタンがあれば、次ページ数を宣言しプログレスバーを更新
         if next_page:
             i += 1
             progress_bar.progress(i / total_pages)
@@ -89,15 +75,9 @@ def scrapying():
         else:
             break
 
-
-
     df = pd.DataFrame(d_list)
-    # t_delta = datetime.timedelta(hours=9)
-    # JST = datetime.timezone(t_delta, 'JST')
-    # now = datetime.datetime.now(JST)
-    # d = now.strftime('%Y-%m-%d')
 
-    # スクレイピングが完了したら、メッセージを削除
+    # スクレイピングが完了したら、メッセージを削除しデータフレームを返す
     message.empty()
     return df
 
