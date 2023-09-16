@@ -17,8 +17,8 @@ def scrapying():
     progress_bar = st.progress(0)
 
     # ページごとにurlを変え、スクレイピングしてリストへ保存までの一連の作業を繰り返す
-    # for i in range(3):
-    while True:
+    for i in range(3):
+    # while True:
         url = f'https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page={i}'
 
         # urlへアクセスしHTMLをBeautifulSoupで解析する
@@ -78,16 +78,16 @@ def scrapying():
         # progress_bar.progress(i / total_pages * 100)
         
         # 「次へ」ボタンがあるかどうかをチェック
-        next_page = soup.select_one('a.to_next_page')
+        # next_page = soup.select_one('a.to_next_page')
 
-        # 「次へ」ボタンがあれば、次ページ数を宣言する
-        if next_page:
-            i += 1
-            progress_bar.progress(i / total_pages)
+        # # 「次へ」ボタンがあれば、次ページ数を宣言する
+        # if next_page:
+        #     i += 1
+        #     progress_bar.progress(i / total_pages)
         
-        # 無ければ、最終ページと判断し、このループを終了させる
-        else:
-            break
+        # # 無ければ、最終ページと判断し、このループを終了させる
+        # else:
+        #     break
 
 
 
