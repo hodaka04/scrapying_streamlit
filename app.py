@@ -9,6 +9,8 @@ import streamlit as st
 def scrapying():
     # スクレイピング実行中メッセージを表示
     message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約１時間)")
+    progress_text = st.empty()
+
     d_list = []
     # 初期ページ数の宣言
     i = 1
@@ -30,7 +32,10 @@ def scrapying():
         sleep(sec)
 
         #　1page目だけ総ページ数を取得
-        total_pages = int(soup.select_one('a.to_last_page').text)
+        if i == 1:
+            total_pages = int(soup.select_one('a.to_last_page').text)
+        
+        progress_text.text(f'現在{total_pages}ページ中{i}ページ目をスクレイピングしています。')
         # 解析したHTMLから各商品情報を取得
         card_infos = soup.select('ul.layout160 > li')
 
