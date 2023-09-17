@@ -155,5 +155,13 @@ if st.button('## スクレイピング開始'):
     st.write('## スクレイピング結果')
     st.write(df_scrapying_1)
 
-# df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
+# CSVファイルとしてダウンロードするボタンを追加
+csv_file = df_scrapying_1.to_csv(index=False)  # インデックスを含まないCSV形式のデータを作成
+
+st.download_button(
+    label="CSVファイルとしてダウンロード",
+    data=csv_file,
+    file_name="scraping_result.csv",  # ダウンロード時のファイル名
+    key="csv-download"
+)
 
