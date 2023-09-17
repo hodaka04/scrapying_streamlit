@@ -155,7 +155,7 @@ if st.button('## スクレイピング開始'):
     df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2])
 
     st.write('## スクレイピング結果')
-    st.dataframe(df_scrapying, index=False)
+    st.write(df_scrapying, index=False)
 
 # df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
 
