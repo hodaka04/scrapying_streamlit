@@ -6,7 +6,7 @@ import re
 from bs4 import BeautifulSoup
 import streamlit as st
 
-def scrapying():
+def scrapying(total_pages):
     # スクレイピング実行中メッセージを表示
     message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約１時間)")
     progress_text = st.empty()
@@ -19,7 +19,7 @@ def scrapying():
 
     # ページごとにurlを変え、スクレイピングしてリストへ保存までの一連の作業を繰り返す
 
-    while True:
+    for i in range(total_pages):
         url = f'https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page={i}'
 
         # urlへアクセスしHTMLをBeautifulSoupで解析する
@@ -30,10 +30,6 @@ def scrapying():
         soup = BeautifulSoup(r.content, 'lxml')
         sec = random.uniform(1, 3)
         sleep(sec)
-
-        #　1page目だけ総ページ数を取得
-        if i == 1:
-            total_pages = int(soup.select_one('a.to_last_page').text)
         
         progress_text.text(f'現在{total_pages}ページ中{i}ページ目をスクレイピングしています。')
         # 解析したHTMLから各商品情報を取得
@@ -67,18 +63,9 @@ def scrapying():
                     '商品URL':card_url        
                 }
                 d_list.append(d)
-        
-        # 「次へ」ボタンがあるかどうかをチェック
-        next_page = soup.select_one('a.to_next_page')
-
-        # 「次へ」ボタンがあれば、次ページ数を宣言しプログレスバーを更新
-        if next_page:
-            i += 1
-            progress_bar.progress(i / total_pages)
-        
-        # 無ければ、最終ページと判断し、このループを終了させる
-        else:
-            break
+                
+        # プログレスバーを更新
+        progress_bar.progress(i / total_pages)
 
     df = pd.DataFrame(d_list)
 
@@ -88,6 +75,14 @@ def scrapying():
 
 
 st.title('Webスクレイピングアプリ')
+
+# urlへアクセスしHTMLをBeautifulSoupで解析する
+r = requests.get('https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page=1')
+r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
+sleep(1)
+soup = BeautifulSoup(r.content, 'lxml')
+#　総ページ数を取得
+total_pages = int(soup.select_one('a.to_last_page').text)
 
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
