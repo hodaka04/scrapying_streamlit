@@ -63,7 +63,7 @@ def scrapying(total_pages):
                     '商品URL':card_url        
                 }
                 d_list.append(d)
-                
+
         # プログレスバーを更新
         progress_bar.progress(i / total_pages)
 
@@ -86,7 +86,7 @@ total_pages = int(soup.select_one('a.to_last_page').text)
 
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
-    df_scrapying = scrapying()
+    df_scrapying = scrapying(total_pages)
 
 # スクレイピングの結果を表示
 if 'df_scrapying' in locals():
