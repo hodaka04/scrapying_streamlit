@@ -21,11 +21,9 @@ def scrapying_1(total_pages):
         # urlへアクセスしHTMLをBeautifulSoupで解析する
         r = requests.get(url)
         r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
-        sec = random.uniform(3, 5)
-        sleep(sec)
-        soup = BeautifulSoup(r.content, 'lxml')
         sec = random.uniform(1, 3)
         sleep(sec)
+        soup = BeautifulSoup(r.content, 'lxml')
         
         progress_text.text(f'現在{total_pages}ページ中{i+1}ページ目をスクレイピングしています。')
         # 解析したHTMLから各商品情報を取得
