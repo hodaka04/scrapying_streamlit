@@ -64,6 +64,7 @@ def scrapying_1(total_pages):
         progress_bar.progress((i+1) / total_pages)
 
     df = pd.DataFrame(d_list)
+    progress_bar.empty()
     progress_text.empty()
     return df
 
@@ -127,6 +128,7 @@ def scrapying_2(total_pages):
         progress_bar.progress(i / total_pages)
 
     df = pd.DataFrame(d_list)
+    progress_bar.empty()
     progress_text.empty()
     return df
 
@@ -154,7 +156,7 @@ if st.button('## スクレイピング開始'):
 
 # スクレイピングの結果を表示
 if 'df_scrapying' in locals():
-    st.write('## スクレイピング結果', df_scrapying)
+    st.write('## スクレイピング結果', df_scrapying, index=False)
 
 # df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
 
