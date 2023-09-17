@@ -142,9 +142,9 @@ st.title('Webスクレイピングアプリ')
 # r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
 # sleep(1)
 # soup = BeautifulSoup(r.content, 'lxml')
-#　総ページ数を取得
+# # 総ページ数を取得
 # total_pages = int(soup.select_one('a.to_last_page').text)
-total_pages = 10
+total_pages = 9
 
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
