@@ -15,7 +15,7 @@ def scrapying_1(total_pages):
     d_list = []
     # ページごとにurlを変え、スクレイピングしてリストへ保存までの一連の作業を繰り返す
 
-    for i in range(total_pages//2):
+    for i in range(total_pages):
         url = f'https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page={i+1}'
 
         # urlへアクセスしHTMLをBeautifulSoupで解析する
@@ -70,7 +70,7 @@ def scrapying_1(total_pages):
 
 
 
-def scrapying_2(total_pages):
+# def scrapying_2(total_pages):
     # スクレイピング実行中メッセージを表示
     progress_text = st.empty()
     # スクレイピングの進捗バーを表示
@@ -137,25 +137,25 @@ def scrapying_2(total_pages):
 
 st.title('Webスクレイピングアプリ')
 
-# # urlへアクセスしHTMLをBeautifulSoupで解析する
-# r = requests.get('https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page=1')
-# r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
-# sleep(1)
-# soup = BeautifulSoup(r.content, 'lxml')
-# # 総ページ数を取得
-# total_pages = int(soup.select_one('a.to_last_page').text)
-total_pages = 9
+# urlへアクセスしHTMLをBeautifulSoupで解析する
+r = requests.get('https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page=1')
+r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
+sleep(1)
+soup = BeautifulSoup(r.content, 'lxml')
+# 総ページ数を取得
+total_pages = int(soup.select_one('a.to_last_page').text)
+# total_pages = 9
 
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
     message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約１時間)")
     df_scrapying_1 = scrapying_1(total_pages)
-    df_scrapying_2 = scrapying_2(total_pages)
+    # df_scrapying_2 = scrapying_2(total_pages)
     message.empty()
-    df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2]).reset_index(drop=True)
+    # df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2]).reset_index(drop=True)
 
     st.write('## スクレイピング結果')
-    st.write(df_scrapying)
+    st.write(df_scrapying_1)
 
 # df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
 
