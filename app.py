@@ -154,8 +154,6 @@ if st.button('## スクレイピング開始'):
     message.empty()
     df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2])
 
-# スクレイピングの結果を表示
-if 'df_scrapying' in locals():
     st.write('## スクレイピング結果')
     st.dataframe(df_scrapying, index=False)
 
