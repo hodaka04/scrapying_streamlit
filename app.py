@@ -61,7 +61,7 @@ def scrapying_1(total_pages):
                 d_list.append(d)
 
         # プログレスバーを更新
-        progress_bar.progress(i+1 / total_pages)
+        progress_bar.progress((i+1) / total_pages)
 
     df = pd.DataFrame(d_list)
     progress_text.empty()
