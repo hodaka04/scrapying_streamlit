@@ -152,10 +152,10 @@ if st.button('## スクレイピング開始'):
     df_scrapying_1 = scrapying_1(total_pages)
     df_scrapying_2 = scrapying_2(total_pages)
     message.empty()
-    df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2])
+    df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2]).reset_index(drop=True)
 
     st.write('## スクレイピング結果')
-    st.table(df_scrapying, index=False)
+    st.write(df_scrapying)
 
 # df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
 
