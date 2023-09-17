@@ -147,16 +147,16 @@ total_pages = int(soup.select_one('a.to_last_page').text)
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
     message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約１時間)")
-    df_scrapying_1 = scrapying_1(total_pages)
+    df_scrapying = scrapying_1(total_pages)
     # df_scrapying_2 = scrapying_2(total_pages)
     message.empty()
     # df_scrapying = pd.concat([df_scrapying_1, df_scrapying_2]).reset_index(drop=True)
 
     st.write('## スクレイピング結果')
-    st.write(df_scrapying_1)
+    st.write(df_scrapying)
 
 # CSVファイルとしてダウンロードするボタンを追加
-csv_file = df_scrapying_1.to_csv(index=False)  # インデックスを含まないCSV形式のデータを作成
+csv_file = df_scrapying.to_csv(index=False)  # インデックスを含まないCSV形式のデータを作成
 
 st.download_button(
     label="CSVファイルとしてダウンロード",
