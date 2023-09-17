@@ -12,15 +12,13 @@ def scrapying(total_pages):
     progress_text = st.empty()
 
     d_list = []
-    # 初期ページ数の宣言
-    i = 1
     # スクレイピングの進捗バーを表示
     progress_bar = st.progress(0)
 
     # ページごとにurlを変え、スクレイピングしてリストへ保存までの一連の作業を繰り返す
 
     for i in range(total_pages):
-        url = f'https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page={i}'
+        url = f'https://www.cardrush-pokemon.jp/product-list?page=2&fpc=11446.2159.60.65e0419bb9e7e60v.1697681557000&page={i+1}'
 
         # urlへアクセスしHTMLをBeautifulSoupで解析する
         r = requests.get(url)
@@ -31,7 +29,7 @@ def scrapying(total_pages):
         sec = random.uniform(1, 3)
         sleep(sec)
         
-        progress_text.text(f'現在{total_pages}ページ中{i}ページ目をスクレイピングしています。')
+        progress_text.text(f'現在{total_pages}ページ中{i+1}ページ目をスクレイピングしています。')
         # 解析したHTMLから各商品情報を取得
         card_infos = soup.select('ul.layout160 > li')
 
