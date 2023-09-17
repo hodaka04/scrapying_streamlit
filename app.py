@@ -82,7 +82,6 @@ if st.button('## スクレイピング開始'):
     df_scrapying = scrapying_1(total_pages)
     message.empty()
 
-if 'df_scraping' in locals():
     st.write('## スクレイピング結果')
     st.write(df_scrapying)
 
