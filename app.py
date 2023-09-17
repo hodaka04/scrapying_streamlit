@@ -156,7 +156,8 @@ if st.button('## スクレイピング開始'):
 
 # スクレイピングの結果を表示
 if 'df_scrapying' in locals():
-    st.write('## スクレイピング結果', df_scrapying, index=False)
+    st.write('## スクレイピング結果')
+    st.dataframe(df_scrapying, index=False)
 
 # df.to_csv(f'{d}.csv', index=None, encoding='utf-8-sig')
 
