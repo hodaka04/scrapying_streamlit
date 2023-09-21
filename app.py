@@ -1,5 +1,5 @@
 from time import sleep
-import random
+# import random
 import pandas as pd
 import requests
 import re
@@ -21,8 +21,8 @@ def scrapying_1(total_pages):
         # urlへアクセスしHTMLをBeautifulSoupで解析する
         r = requests.get(url)
         r.raise_for_status() #アクセス失敗したときに直ちにプログラムを停止させる
-        sec = random.uniform(1, 3)
-        sleep(sec)
+        # sec = random.uniform(1, 3)
+        sleep(1)
         soup = BeautifulSoup(r.content, 'lxml')
         
         progress_text.text(f'現在{total_pages}ページ中{i+1}ページ目をスクレイピングしています。')
