@@ -78,7 +78,7 @@ total_pages = int(soup.select_one('a.to_last_page').text)
 
 if st.button('## スクレイピング開始'):
     # スクレイピングを実行
-    message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約30分)")
+    message = st.text("スクレイピング実行中です。しばらくお待ちください。(所要時間約20分)")
     df_scrapying = scrapying_1(total_pages)
     message.empty()
 
